@@ -3,19 +3,26 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Configurações do Movimento")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpVelocity = 10f;
+    // Variável para armazenar o valor do movimento do jogador
     private Vector2 movementInput;
+    // Referência para o componente Rigidbody2D
     private Rigidbody2D rb;
-    private bool facingRight = true; // Variável para controlar o estado
+    // Referência para o script Flip
+    private Flip scriptFlip;
     private void Awake()
     {
+        // Obtém referências para os componentes Rigidbody2D e Flip
         rb = GetComponent<Rigidbody2D>();
+        scriptFlip = GetComponent<Flip>();
     }
 
     // Chamado pelo evento do Player Input
     public void OnMove(InputAction.CallbackContext context)
     {
+        // Lê o valor do movimento do jogador (eixo X e Y) e armazena na variável movementInput
         movementInput = context.ReadValue<Vector2>();
     }
 
@@ -30,32 +37,20 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        // Mantemos a velocidade Y atual e alteramos apenas a X
         rb.linearVelocity = new Vector2(movementInput.x * moveSpeed, rb.linearVelocity.y);
 
-        // Lógica de Flip
-        if (movementInput.x > 0 && !facingRight)
+        // Se o jogador estiver se movendo para a direita e o personagem estiver virado para a esquerda, vira o personagem
+        if (movementInput.x > 0 && !scriptFlip.IsFacingRight)
         {
-            Flip();
+            // Chama o método FlipCharacter() do script Flip para virar o personagem
+            scriptFlip.FlipCharacter();
         }
-        else if (movementInput.x < 0 && facingRight)
+        // Se o jogador estiver se movendo para a esquerda e o personagem estiver virado para a direita, vira o personagem
+        else if (movementInput.x < 0 && scriptFlip.IsFacingRight)
         {
-            Flip();
+            // Chama o método FlipCharacter() do script Flip para virar o personagem
+            scriptFlip.FlipCharacter();
         }
     }
-    //rotacao por scale -1 no X nao recomendado
-    private void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1; // Inverte o eixo X
-        transform.localScale = scaler;
-    }
-
-    //por rotacao 180 graus por y    private void Flip()
-    // {
-    //     facingRight = !facingRight;
-
-    //     // Rotaciona 180 graus no eixo Y
-    //     transform.Rotate(0f, 180f, 0f);
-    // }
 }

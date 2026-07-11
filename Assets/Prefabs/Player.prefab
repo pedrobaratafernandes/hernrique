@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2675835903314839665}
   - component: {fileID: 4789036386477829813}
   - component: {fileID: 4124660691694843972}
+  - component: {fileID: 7788990011223344556}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -258,6 +259,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 2776c80d-3c14-4091-8c56-d04ced07a2b0
+
     m_ActionName: 'Player/Previous[/Keyboard/1]'
   - m_PersistentCalls:
       m_Calls: []
@@ -312,3 +314,16 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+
+--- !u!114 &7788990011223344556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684151041755767939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0295e71cd53a28439cbee27e4066f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Flip
